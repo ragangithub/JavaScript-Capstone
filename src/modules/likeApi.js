@@ -1,11 +1,10 @@
-const url =
-  "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/7zNZUtcbTuMAxmu5O1El/likes";
-export const getLikes = async () => {
+const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/m8AZVOhORDmZV080nkzY/likes';
+export const getLikes = async (number) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    const slicedLikes = data.slice(0, 3);
-    console.log(slicedLikes);
+    const slicedLikes = data.slice(0, number);
+
     return slicedLikes;
   } catch (error) {
     return error;
@@ -14,16 +13,16 @@ export const getLikes = async () => {
 
 export const addLike = async (id) => {
   try {
-    await fetch(url, {
-      method: "POST",
+    const response = await fetch(url, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         item_id: id,
       }),
     });
-    movie.displayMovies();
+    return response;
   } catch (error) {
     return error;
   }

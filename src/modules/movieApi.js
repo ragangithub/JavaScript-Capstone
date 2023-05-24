@@ -1,13 +1,14 @@
-const url = "https://api.tvmaze.com/shows";
+const url = 'https://api.tvmaze.com/shows';
 
-export const getMovies = async () => {
+const getMovies = async () => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    const slicedData = data.slice(0, 3);
-    console.log(slicedData);
+    const slicedData = data.slice(0, 9);
     return slicedData;
   } catch (error) {
     return error;
   }
 };
+
+export default getMovies;

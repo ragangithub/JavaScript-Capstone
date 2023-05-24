@@ -1,5 +1,4 @@
-const url =
-  "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/9ifaHyOaZjD6ixc1cQTf/comments";
+const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/9ifaHyOaZjD6ixc1cQTf/comments';
 
 export const getComments = async (id) => {
   try {
@@ -14,11 +13,11 @@ export const getComments = async (id) => {
 
 export const postComment = async (data) => {
   await fetch(url, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
   });
 };
