@@ -30,7 +30,7 @@ document.addEventListener('click', async (e) => {
     const { movies } = movie;
     const body = document.querySelector('body');
     const { id } = target.parentNode;
-    const comments = await getComments(id);
+    let comments = await getComments(id);
 
     const modalContainer = document.createElement('li');
     modalContainer.className = 'popup';
@@ -60,7 +60,7 @@ document.addEventListener('click', async (e) => {
       `;
       comments.forEach((comment) => {
         modalContainer.innerHTML += `
-        <div class="comments">
+        <div class="comments flex">
       <p class="comment-date">${comment.creation_date} ${comment.username} :</p>
       <p class="comment-msg">${comment.comment}</p>
       </div>`;
@@ -80,7 +80,10 @@ document.addEventListener('click', async (e) => {
     `;
 
     const form = document.querySelector('form');
-    form.addEventListener('submit', (e) => {
+    const commentCounter = document.querySelector('.comment-counter');
+    const commentContainer = document.querySelectorAll('.flex');
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.querySelector('input');
       const commentMsg = document.querySelector('textarea');
@@ -91,11 +94,38 @@ document.addEventListener('click', async (e) => {
         comment: commentMsg.value,
       };
 
-      postComment(commentData);
-      getComments(id);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      form.remove();
+      commentCounter.remove();
+      commentContainer.forEach((comment) => {
+        comment.remove();
+      });
+
+      await postComment(commentData);
+      comments = await getComments(id);
+
+      modalContainer.innerHTML += `
+      <div class='comment-counter'>
+      comments(${comments.length})
+      </div>
+      `;
+
+      comments.forEach((comment) => {
+        modalContainer.innerHTML += `
+            <div class="comments flex">
+          <p class="comment-date">${comment.creation_date} ${comment.username} :</p>
+          <p class="comment-msg">${comment.comment}</p>
+          </div>`;
+      });
+
+      modalContainer.innerHTML += `
+
+        <form >
+        <h2 class="heading">Add a comment</h2>
+          <input type="text" placeholder="Enter your name" required />
+          <textarea placeholder="Enter your comment here" required></textarea>
+          <button type="submit" class="btn flex">Submit</button>
+        </form>
+      `;
 
       name.value = '';
       commentMsg.value = '';
