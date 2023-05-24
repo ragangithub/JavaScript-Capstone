@@ -70,7 +70,9 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-> coming soon
+> Check the live demo here [LINK](https://drive.google.com/file/d/1tNRSe7ZVvR0XDvBbPz8qD5YMAc2s0Y8q/view?usp=sharing)
+
+Check the live version [here](https://ragangithub.github.io/JavaScript-Capstone/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
